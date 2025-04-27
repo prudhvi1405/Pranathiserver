@@ -85,10 +85,10 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/gettables', async (req, res) => {
   console.log("hello bro");
   try {
-    const [rows1] = await dbPool.execute('SELECT * FROM Households LIMIT 100');
-    const [rows2] = await dbPool.execute('SELECT * FROM NewTransactions LIMIT 100');
-    const [rows3] = await dbPool.execute('SELECT * FROM Products LIMIT 100');
-    const [rows4] = await dbPool.execute('SELECT t.HSHD_NUM, t.BASKET_NUM, t.PRODUCT_NUM, p.DEPARTMENT, p.COMMODITY, t.SPEND, t.UNITS, t.STORE_R, t.WEEK_NUM, t.YEAR, h.L, h.AGE_RANGE, h.MARITAL, h.INCOME_RANGE, h.HOMEOWNER, h.HSHD_COMPOSITION, h.HH_SIZE, h.CHILDREN FROM NewTransactions t JOIN Households h ON t.HSHD_NUM = h.HSHD_NUM JOIN Products p ON t.PRODUCT_NUM = p.PRODUCT_NUM LIMIT 100');
+    const [rows1] = await dbPool.execute('SELECT * FROM HOUSEHOLDS LIMIT 100');
+    const [rows2] = await dbPool.execute('SELECT * FROM TRANSACTIONS LIMIT 100');
+    const [rows3] = await dbPool.execute('SELECT * FROM PRODUCTS LIMIT 100');
+    const [rows4] = await dbPool.execute('SELECT t.HSHD_NUM, t.BASKET_NUM, t.PRODUCT_NUM, p.DEPARTMENT, p.COMMODITY, t.SPEND, t.UNITS, t.STORE_R, t.WEEK_NUM, t.YEAR, h.L, h.AGE_RANGE, h.MARITAL, h.INCOME_RANGE, h.HOMEOWNER, h.HSHD_COMPOSITION, h.HH_SIZE, h.CHILDREN FROM TRANSACTIONS t JOIN HOUSEHOLDS h ON t.HSHD_NUM = h.HSHD_NUM JOIN PRODUCTS p ON t.PRODUCT_NUM = p.PRODUCT_NUM LIMIT 100');
 
     if (rows1.length === 0 || rows2.length === 0 || rows3.length === 0 || rows4.length === 0) {
       res.status(401).json({ message: 'Empty table/ Table might not exist' });
